@@ -15,6 +15,7 @@ templates = Jinja2Templates(directory=str(Path(__file__).resolve().parent / "tem
 
 
 @router.get("/")
+@router.get("/productos")
 async def listar_productos(request: Request, conn: ConnectionDep):
     # Ya implementado: muestra la página con la lista de productos.
     productos = await obtener_productos(conn)
