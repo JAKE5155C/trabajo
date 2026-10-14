@@ -1,0 +1,1 @@
+"""Presentación HTTP y recursos estáticos."""

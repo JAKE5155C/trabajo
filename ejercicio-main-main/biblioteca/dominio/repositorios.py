@@ -1,6 +1,5 @@
-# Este archivo concentra todas las consultas SQL del ejercicio.
-# Todas usan parámetros ($1, $2, ...): nunca se concatenan valores
-# recibidos del formulario dentro del texto SQL.
+# Todas las consultas usan parámetros ($1, $2, ...): nunca se concatenan
+# valores recibidos del formulario dentro del texto SQL.
 
 
 async def obtener_productos(conn) -> list[dict]:
@@ -36,10 +35,7 @@ async def actualizar_producto(
     cantidad: int,
     descripcion: str | None,
 ) -> bool:
-    """Actualiza un producto identificado por su clave primaria (id).
-
-    Devuelve True si la consulta modificó una fila, False si no existía.
-    """
+    """Actualiza un producto y devuelve si encontró el registro."""
     resultado = await conn.execute(
         """
         UPDATE productos

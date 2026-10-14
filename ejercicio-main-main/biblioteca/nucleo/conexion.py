@@ -1,8 +1,10 @@
 import asyncio
-import os
+from typing import Annotated
 
 import asyncpg
-from fastapi import HTTPException
+from fastapi import Depends, HTTPException
+
+from biblioteca.nucleo.configuracion import obtener_database_url
 
 
 class Db:
@@ -20,7 +22,7 @@ class Db:
         )
 
     async def connect_from_environment(self):
-        db_url = os.environ.get("DATABASE_URL", "").strip().strip('"').strip("'")
+        db_url = obtener_database_url()
         if not db_url:
             raise HTTPException(
                 status_code=503,
@@ -51,3 +53,6 @@ async def get_connection():
         await db.connect_from_environment()
     async with db.pool.acquire() as conn:
         yield conn
+
+
+ConnectionDep = Annotated[asyncpg.Connection, Depends(get_connection)]

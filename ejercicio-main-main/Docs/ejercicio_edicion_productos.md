@@ -46,13 +46,13 @@ La aplicación ya funciona así:
   </button>
   ```
 
-  Al pulsarlo, HTMX hace `GET /productos/5/editar` y **reemplaza** ese
-  `<tbody>` con la respuesta HTML del servidor.
+  1. Delega conversión y validación a `validar_actualizacion_producto` en servicios.
+  2. Valida con `ProductoActualizar`.
 
 Falta que implementes las tres rutas de edición:
 
-| Ruta                          | Qué debe hacer                                                               |
-| ----------------------------- | ---------------------------------------------------------------------------- |
+  1. Delega conversión y validación a `validar_actualizacion_producto` en servicios.
+  2. Valida con `ProductoActualizar`.
 | `GET /productos/{id}/editar`  | Buscar el producto y responder con el formulario (plantilla `fila_editar.html`) |
 | `POST /productos/{id}`       | Validar los datos y, si son correctos, ejecutar el `UPDATE`                   |
 | `GET /productos/{id}/cancelar` | Ya está implementada: devuelve la fila a su estado normal                   |
@@ -143,15 +143,15 @@ Tu implementación debe cumplir lo siguiente:
 
 ## 7. Instrucciones de trabajo paso a paso
 
-Abre cada archivo indicado y busca los comentarios `TODO(n)`. Trabajá en este
-orden (cada paso depende del anterior):
+La funcionalidad está organizada en capas. Usa este recorrido para revisar
+cómo se implementa cada responsabilidad:
 
-**Paso 1 — Validación (`esquemas.py`)**
+**Paso 1 — Validación (`biblioteca/dominio/esquemas.py`)**
 
 Define la clase `ProductoActualizar` con las reglas de validación del
 requisito 2, usando los campos de Pydantic (`Field`).
 
-**Paso 2 — Consultas (`repositorio.py`)**
+**Paso 2 — Consultas (`biblioteca/dominio/repositorios.py`)**
 
 Implementa las tres funciones (imítate la firma que ya está escrita):
 
@@ -159,20 +159,19 @@ Implementa las tres funciones (imítate la firma que ya está escrita):
 - `obtener_producto(conn, producto_id)`: `SELECT` de un producto por su `id`.
 - `actualizar_producto(...)`: `UPDATE ... WHERE id = $n` con parámetros.
 
-Prueba que devuelven datos reales llamándolas desde `vistas.py`.
+Las rutas consumen estas consultas a través de `biblioteca/dominio/servicios.py`.
 
-**Paso 3 — Formulario de edición (`vistas.py`, ruta `editar_producto_vista`)**
+**Paso 3 — Formulario de edición (`biblioteca/presentacion/rutas/ejercicios.py`, ruta `editar_producto_vista`)**
 
 Completa `GET /productos/{producto_id}/editar`: busca el producto y renderiza
 `componentes/fila_editar.html`. Comprueba en el navegador que el formulario
 muestra los valores actuales del producto.
 
-**Paso 4 — Guardar cambios (`vistas.py`, ruta `guardar_producto_vista`)**
+**Paso 4 — Guardar cambios (`biblioteca/presentacion/rutas/ejercicios.py`, ruta `guardar_producto_vista`)**
 
 Completa `POST /productos/{producto_id}`:
 
-1. Convierte los valores de texto a número (`float` / `int`).
-2. Valida con `ProductoActualizar`.
+1. Delega conversión y validación a `validar_actualizacion_producto` en servicios.
 3. Si hay errores → renderiza el formulario de nuevo con los valores
    recibidos y un diccionario de errores, y responde con código 422.
 4. Si es válido → ejecuta `actualizar_producto` y renderiza
@@ -251,5 +250,5 @@ curl -X POST http://127.0.0.1:8000/productos/3 \
 > respuesta, pero es una forma rápida de comprobar que el servidor responde
 > bien. Prueba siempre también desde el navegador.
 
-¡Mucho éxito! Cuando termines, compara tu solución con la carpeta `solucion/`
-que incluye el docente.
+La aplicación se inicia con `uvicorn main:app --reload`; `main.py` importa la
+aplicación ensamblada en `biblioteca/main.py`.

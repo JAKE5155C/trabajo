@@ -48,8 +48,7 @@ No subas el archivo `.env`; las variables de producción deben configurarse en V
 
 ## Estado del proyecto
 
-- La página `GET /productos` ya muestra la lista de productos.
-- El botón **Editar** apunta a las rutas que debes implementar.
-- Los archivos `esquemas.py`, `repositorio.py` y `vistas.py` contienen
-  comentarios `TODO(n)` que indican qué falta en cada paso.
-- La carpeta `solucion/` contiene la implementación completa de referencia.
+- `biblioteca/nucleo/` contiene la configuración y el pool de PostgreSQL.
+- `biblioteca/dominio/` contiene los esquemas, servicios y consultas SQL.
+- `biblioteca/presentacion/` contiene las rutas y plantillas HTML.
+- `main.py` conserva el punto de entrada para `uvicorn main:app` y Vercel.
