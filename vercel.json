@@ -2,14 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "ejercicio-main-main/api/index.py",
-      "use": "@vercel/python"
+      "src": "pdfs-main/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": "pdfs-main/templates/**"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "ejercicio-main-main/api/index.py"
+      "dest": "pdfs-main/main.py"
     }
   ]
 }

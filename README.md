@@ -37,7 +37,6 @@ Abre <http://127.0.0.1:8000> en el navegador.
 1. Importa el repositorio en Vercel.
 2. Puedes seleccionar `pdfs-main` como **Root Directory** para usar su configuración, o dejar la raíz del repositorio como directorio: el `vercel.json` de la raíz también apunta a esta aplicación e incluye sus plantillas.
 3. Después de subir los cambios al repositorio, crea un nuevo deployment en Vercel. Para confirmar que se muestra la versión nueva, verifica que el deployment use el commit más reciente.
-
 Enlace del proyecto: <https://trabajo-1o9e.vercel.app/>.
 
 ## Estructura
