@@ -10,7 +10,7 @@ pip install -r requirements.txt uvicorn
 uvicorn main:app --reload
 ```
 
-Abre `http://127.0.0.1:8000`.
+Abre `https://trabajo-ovkn.vercel.app/`.
 
 ## Publicar en Vercel
 
