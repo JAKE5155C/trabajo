@@ -1,1 +1,0 @@
-"""Esquemas, reglas de negocio y repositorios."""

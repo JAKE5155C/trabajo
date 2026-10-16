@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 2cm;
+        }
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            color: #000;
+        }
+        table {
+            width: 100%;
+        }
+        th {
+            text-align: left;
+            padding: 6px 8px;
+            border: 1px solid #000;
+        }
+        td {
+            padding: 6px 8px;
+            border: 1px solid #000;
+        }
+        .right {
+            text-align: right;
+        }
+    </style>
+    {% if preview %}
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+        .preview-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .actions {
+            max-width: 800px;
+            margin: 1rem auto 0;
+        }
+    </style>
+    {% endif %}
+</head>
+<body>
+    {% if preview %}
+    <div class="preview-info">
+        Vista previa de la lista.
+    </div>
+    <main>
+    {% endif %}
+
+    <h1>{{ title }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th class="right">Precio ($)</th>
+                <th class="right">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td class="right">${{ "%.2f"|format(product.price) }}</td>
+                <td class="right">{{ product.stock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Total de productos: {{ products|length }}</p>
+
+    {% if preview %}
+    </main>
+    <div class="actions">
+        <p><a href="/report/pdf">Descargar PDF</a></p>
+        <p><a href="/">Volver al inicio</a></p>
+    </div>
+    {% endif %}
+</body>
+</html>

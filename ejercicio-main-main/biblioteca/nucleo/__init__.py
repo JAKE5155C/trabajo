@@ -1,1 +1,0 @@
-"""Configuración e infraestructura de conexión."""
