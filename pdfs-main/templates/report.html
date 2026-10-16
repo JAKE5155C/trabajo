@@ -11,7 +11,7 @@
         body {
             font-family: Helvetica, Arial, sans-serif;
             font-size: 11px;
-            color: #000;
+            color: #17233c;
         }
         table {
             width: 100%;
@@ -19,11 +19,12 @@
         th {
             text-align: left;
             padding: 6px 8px;
-            border: 1px solid #000;
+            border: 1px solid #cbd5e1;
+            background-color: #edf3fb;
         }
         td {
             padding: 6px 8px;
-            border: 1px solid #000;
+            border: 1px solid #cbd5e1;
         }
         .right {
             text-align: right;
@@ -32,16 +33,97 @@
     {% if preview %}
     <style>
         body {
+            min-height: 100vh;
             margin: 0;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
+            background: #f3f6fb;
+            color: #17233c;
+            font-family: Arial, sans-serif;
         }
         .preview-info {
-            max-width: 800px;
+            width: min(100%, 850px);
+            margin: 0 auto 1rem;
+            color: #64728a;
+            font-size: 0.9rem;
+        }
+        main {
+            width: min(100%, 850px);
             margin: 0 auto;
+            padding: clamp(1.25rem, 5vw, 2.5rem);
+            overflow-x: auto;
+            border: 1px solid #e4eaf3;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 18px 55px rgba(27, 49, 83, 0.09);
+        }
+        h1 {
+            margin: 0 0 1.5rem;
+            font-size: clamp(1.7rem, 5vw, 2.3rem);
+            letter-spacing: -0.04em;
+        }
+        table {
+            min-width: 570px;
+            font-size: 0.9rem;
+        }
+        th {
+            padding: 0.85rem 0.75rem;
+            border-color: #e3eaf3;
+            background: #f1f5fb;
+            color: #43536c;
+        }
+        td {
+            padding: 0.85rem 0.75rem;
+            border-color: #e8edf4;
+        }
+        tbody tr:nth-child(even) {
+            background: #fafbfe;
+        }
+        .total {
+            margin: 1.25rem 0 0;
+            color: #64728a;
+            font-size: 0.9rem;
+        }
+        .total strong {
+            color: #17233c;
         }
         .actions {
-            max-width: 800px;
+            display: flex;
+            width: min(100%, 850px);
+            flex-wrap: wrap;
+            gap: 0.75rem;
             margin: 1rem auto 0;
+        }
+        .actions p {
+            margin: 0;
+        }
+        .actions a {
+            display: inline-block;
+            padding: 0.8rem 1rem;
+            border: 1px solid #d9e2ef;
+            border-radius: 10px;
+            background: #fff;
+            color: #2458ad;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 150ms ease;
+        }
+        .actions p:first-child a {
+            border-color: #2458ad;
+            background: #2458ad;
+            color: #fff;
+        }
+        .actions a:hover {
+            background: #eaf2ff;
+            color: #19478f;
+        }
+        .actions p:first-child a:hover {
+            background: #19478f;
+            color: #fff;
+        }
+        .actions a:focus-visible {
+            outline: 3px solid #9fc2ff;
+            outline-offset: 3px;
         }
     </style>
     {% endif %}
@@ -79,7 +161,7 @@
         </tbody>
     </table>
 
-    <p>Total de productos: {{ products|length }}</p>
+    <p class="total">Total de productos: <strong>{{ products|length }}</strong></p>
 
     {% if preview %}
     </main>
